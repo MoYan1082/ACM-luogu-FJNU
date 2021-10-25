@@ -32,6 +32,16 @@ public class SaveNewData implements Runnable {
                 TxtToImageUtil.createImage(upData.toString(), "./resources/upData.jpg");
                 System.out.println("数据刷新成功！！");
 
+                try {
+                    // 使用phantomjs工具获取web页面的png图片
+                    ProcessBuilder processBuilder = new ProcessBuilder();
+                    processBuilder.command("bash", "-c", "phantomjs ./resources/getPng.js");
+                    Process process = processBuilder.start();
+                    process.waitFor();  // 等待进程结束
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 TimeUnit.MINUTES.sleep(10);
             } catch (Exception e) {
                 System.out.println("newData出现异常：" + e.getMessage());
