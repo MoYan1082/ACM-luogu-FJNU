@@ -1,0 +1,15 @@
+resources/avatars/*
+resources/cookie.txt
+.idea/
+cache/
+device.json
+
+ACM-luogu-bot/gradle/
+ACM-luogu-bot/src/test/
+ACM-luogu-bot/src/main/java/QQcount.java
+ACM-luogu-bot/.gradle/
+ACM-luogu-bot/build/
+
+ACM-luogu-web/.mvn/
+ACM-luogu-web/target/
+ACM-luogu-web/src/test/

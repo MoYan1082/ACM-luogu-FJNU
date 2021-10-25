@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index1</title>
+</head>
+<body>
+<div class="box0">
+    <span th:text="${Top3.time}" style="color: red"></span>
+    <ul class="top3">
+        <li class="rank-2">
+            <div class="content-detail">
+                <div class="img-contain rank-2">
+                    <div class="img">
+                        <img th:src="@{${Top3.data.get(1).avatar}}">
+                    </div>
+                </div>
+                <h3>
+                    <span class="name t-over-hidden t-nowrap" th:text="${Top3.data.get(1).name}"></span>
+                </h3>
+                <p>题数: <span th:text="${Top3.data.get(1).passedProblemCount}"></span></p>
+                <div class="rank-number balance">02
+                    <span></span>
+                </div>
+            </div>
+        </li>
+        <li class="up rank-1">
+            <div class="content-detail">
+                    <div class="img-contain rank-1">
+                        <div class="img">
+                            <img th:src="@{${Top3.data.get(0).avatar}}">
+                        </div>
+                    </div>
+                    <h3><span class="name t-over-hidden t-nowrap" th:text="${Top3.data.get(0).name}"></span>
+                    </h3>
+                    <p>题数: <span th:text="${Top3.data.get(0).passedProblemCount}"></span></p>
+                    <div class="rank-number up">01
+                        <span></span>
+                    </div>
+                </div>
+        </li>
+        <li class="up rank-3">
+            <div class="content-detail">
+                    <div class="img-contain rank-3">
+                        <div class="img">
+                            <img th:src="@{${Top3.data.get(2).avatar}}">
+                        </div>
+                    </div>
+                    <h3>
+                        <span class="name t-over-hidden t-nowrap" th:text="${Top3.data.get(2).name}"></span>
+                    </h3>
+                    <p>题数: <span style="color: #666;" th:text="${Top3.data.get(2).passedProblemCount}"></span></p>
+                    <div class="rank-number up">03<span></span></div>
+                </div>
+        </li>
+    </ul>
+    <div class="box1">
+        <ul class="top50">
+            <li class="item normal-item" th:each="it : ${other.data}">
+                <dl>
+                    <dt>
+                        <div class="rank-number up">
+                            <div th:text="${it.rank}"></div>
+                            <span></span>
+                        </div>
+                    </dt>
+                    <dd>
+                        <div class="name-info">
+                            <img th:src="@{${it.avatar}}">
+                            <span class="uname" th:text="${it.name}"></span>
+                        </div>
+                        <em>题数: <span th:text="${it.passedProblemCount}"></span></em>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    li {
+        list-style-type:none;
+    }
+    .t-no-wrap, .t-nowrap {
+        white-space: nowrap;
+    }
+    .t-over-hidden {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    body {
+        width: 864px;
+        font-size: 14px;
+        color: #666;
+    }
+    dd, div, dl, dt, li, ol, ul {
+        margin: 0;
+        padding: 0;
+    }
+    dl {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+    }
+    dt {
+        display: block;
+    }
+    em {
+        font-style: normal;
+    }
+    .box0{
+        background-color: rgb(240, 240, 240);
+    }
+    .box1{
+        background-color: white;
+        margin-top: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .img-contain:before {
+        width: 100%;
+        position: absolute;
+        content: "";
+        display: block;
+        background: no-repeat top;
+    }
+    .img-contain.rank-1:before {
+        top: -50px;
+        height: 105px;
+        background-image: url("/img/Top1.png");
+    }
+    .img-contain.rank-2:before {
+        top: -28px;
+        height: 75px;
+        background-image: url('/img/Top2.png');
+    }
+    .top3 {
+        width: 660px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .top3 li div.img {
+        overflow: hidden;
+        position: relative;
+        width: 104px;
+        height: 104px;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+    .top3 li {
+        width: 200px;
+        float: left;
+        margin-right: 30px;
+        height: 335px;
+        position: relative;
+    }
+    .top3 li div.img {
+        overflow: hidden;
+        position: relative;
+        width: 104px;
+        height: 104px;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+    .top3 li div.content-detail {
+        height: 180px;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        background: #fff;
+        width: 200px;
+        border-radius: 10px;
+    }
+    .top3 .content-detail .rank-number {
+        text-align: left;
+        font-style: italic;
+        box-sizing: border-box;
+    }
+    .top3 li div.content-detail h3 {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 17px;
+    }
+    .top3 .content-detail h3 .name {
+        max-width: 95px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .top3 li div.content-detail .rank-number {
+        width: 80px;
+        height: 34px;
+        line-height: 34px;
+        margin: 0 auto;
+        font-size: 24px;
+        border-radius: 20px;
+        padding-left: 10px;
+    }
+    .top3 li div.content-detail p {
+        text-align: center;
+        margin: 5px 0 15px;
+    }
+
+
+
+    .top3 li.rank-1 div.content-detail {
+        height: 200px;
+    }
+    .top3 li.rank-1 div.content-detail .img-contain {
+        position: relative;
+        margin-top: -52px;
+    }
+    .top3 li.rank-1 div.content-detail h3 {
+        color: #ff6744;
+    }
+    .top3 li.rank-1 div.content-detail .rank-number {
+        position: relative;
+        color: #ff6744;
+        border: 1px solid #ff6744;
+    }
+    .top3 li.rank-1 div.content-detail .rank-number span {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 20px;
+        height: 12px;
+    }
+    .top3 li.rank-1 div.img {
+        border: 2px solid #ff6744;
+    }
+    .top3 li.rank-1 div.img img {
+        width: 100%;
+        height: 100%;
+    }
+    .top3 li.rank-1 .rank-number span {
+        background: url('/img/icon-top1.png') no-repeat;
+    }
+
+
+    .top3 li.rank-3 {
+        margin-right: 0;
+    }
+    .top3 li.rank-3 div.content-detail .img-contain {
+        position: relative;
+        margin-top: -52px;
+    }
+    .top3 li.rank-3 div.content-detail h3 {
+        color: #ffb200;
+    }
+    .top3 li.rank-3 div.content-detail .rank-number {
+        position: relative;
+        color: #ffb200;
+        border: 1px solid #ffb200;
+    }
+    .top3 li.rank-3 div.content-detail .rank-number span {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 20px;
+        height: 12px;
+    }
+    .top3 li.rank-3 div.img {
+        border: 2px solid #ffb200;
+    }
+    .top3 li.rank-3 div.img img {
+        width: 100%;
+        height: 100%;
+    }
+    .top3 li.rank-3 .rank-number span {
+        background: url('/img/icon-top3.png') no-repeat;
+    }
+
+
+
+    .top3 li.rank-2 div.content-detail .img-contain {
+        position: relative;
+        margin-top: -52px;
+    }
+    .top3 li.rank-2 div.img {
+        border: 2px solid #44d6ff;
+        overflow: hidden;
+    }
+    .top3 li.rank-2 div.img img {
+        width: 100%;
+        height: 100%;
+    }
+    .top3 li.rank-2 div.content-detail h3 {
+        color: #44d6ff;
+    }
+    .top3 li.rank-2 div.content-detail .rank-number span {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 20px;
+        height: 12px;
+    }
+    .top3 li.rank-2 div.content-detail .rank-number {
+        position: relative;
+        color: #44d6ff;
+        border: 1px solid #44d6ff;
+    }
+    .top3 li.rank-2 .rank-number span {
+        background: url('/img/icon-top2.png') no-repeat;
+    }
+
+
+    .top50 li dd {
+        position: relative;
+        width: 680px;
+        float: left;
+        margin-left: 50px;
+        height: 34px;
+        line-height: 34px;
+        margin-top: 7px;
+    }
+    .top50 li dd .name-info img {
+        float: left;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+    }
+    .top50 li dd .name-info span {
+        float: left;
+        font-size: 14px;
+        padding-left: 20px;
+    }
+    .top50 li dd em {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .top50 li dt {
+        float: left;
+    }
+    .top50 li dt .rank-number {
+        position: relative;
+        width: 86px;
+        height: 34px;
+        line-height: 34px;
+        border-radius: 20px;
+        color: #fff;
+        font-size: 24px;
+        padding-left: 10px;
+        margin: 7px 0 0 7px;
+    }
+    .top50 li dt .rank-number span{
+        position: relative;
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        background: url('/img/icon1.png') no-repeat 50%;
+    }
+    .top50 li dt .rank-number div{
+        display: inline-block;
+        width: 45px;
+    }
+    .top50 li {
+        height: 48px;
+    }
+    .top50 li:nth-child(2n) {
+        background: #f7f8fa;
+    }
+    .top50 li dt .rank-number.up {
+        background: #ffa5a5;
+    }
+</style>
+
+</html>

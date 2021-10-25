@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+group 'com.moyan'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.mamoe:mirai-core:2.7.1'
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.75'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+shadowJar {
+    manifest {
+        //指定入口函数，其他的是默认
+        attributes(
+                'Main-Class': 'JavaMain'
+        )
+    }
+}
