@@ -27,12 +27,13 @@ public class SavePastData implements Runnable {
 
     @Override
     public void run() {
-        // 设定刷新时间
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 50);
-        calendar.set(Calendar.SECOND, 0);
         while(true) {
+            // 设定刷新时间
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 50);
+            calendar.set(Calendar.SECOND, 0);
+
             Date date = new Date();
             int dif = getDifSecond(calendar.getTime(), date);
             try {
@@ -41,7 +42,7 @@ public class SavePastData implements Runnable {
                 Users pastData = GetDataUtil.get();
                 JsonUtils.writeJSON(pastData, "./resources/pastData.json");
                 System.out.println("昨天数据更新昨天！！");
-                TimeUnit.MINUTES.sleep(10); // 等待
+                TimeUnit.MINUTES.sleep(11); // 等待
             } catch (Exception e) {
                 System.out.println("定时任务出现异常：" + e.getMessage());
             }
