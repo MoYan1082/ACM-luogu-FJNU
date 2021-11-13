@@ -18,7 +18,7 @@ public class HtmlAnalyzeUtils {
      * @param str
      * @return
      */
-    public static String unicodeToString(String str) {
+    public static synchronized String unicodeToString(String str) {
         Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
         Matcher matcher = pattern.matcher(str);
         char ch;
@@ -35,7 +35,7 @@ public class HtmlAnalyzeUtils {
      * @return 文件中的文本数据
      * @throws IOException
      */
-    public static String readTxt(String filename) throws IOException {
+    public static synchronized String readTxt(String filename) throws IOException {
         BufferedReader in = new BufferedReader(new FileReader(filename));
         String s;
         StringBuilder sb = new StringBuilder();
@@ -52,7 +52,7 @@ public class HtmlAnalyzeUtils {
      * @return HTML:String
      * @throws IOException
      */
-    public static String getHTML(String url) throws IOException {
+    public static synchronized String getHTML(String url) throws IOException {
         String res = "";
         URL realUrl = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
@@ -96,7 +96,7 @@ public class HtmlAnalyzeUtils {
      * @return
      * @throws IOException
      */
-    public static JSONObject getJson(String url) throws IOException {
+    public static synchronized JSONObject getJson(String url) throws IOException {
         String html = getHTML(url);
         String dataMessage = "";
         String regex = "decodeURIComponent\\(\\\".*\\\"\\)";

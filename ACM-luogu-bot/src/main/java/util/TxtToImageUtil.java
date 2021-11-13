@@ -28,7 +28,7 @@ public class TxtToImageUtil {
      * @param c 需要判断的字符
      * @return 如果是中文字符返回True，否则返回false
      */
-    public static boolean isChinese(char c) {
+    public static synchronized boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
         if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
                 || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS

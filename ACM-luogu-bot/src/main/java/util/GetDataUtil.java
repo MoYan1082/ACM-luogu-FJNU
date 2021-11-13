@@ -22,7 +22,7 @@ public class GetDataUtil {
      * @param jsonObject
      * @return
      */
-    public static List<Data> conversion(JSONObject jsonObject) {
+    public static synchronized List<Data> conversion(JSONObject jsonObject) {
         // 这两个类用于中间转换，没有什么实际用处
         class User {
             public Long uid;
@@ -66,7 +66,7 @@ public class GetDataUtil {
      * @return
      * @throws IOException
      */
-    public static Users get() throws IOException {
+    public static synchronized Users get() throws IOException {
         Users users = new Users();
         users.time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         // =======================================================================================
