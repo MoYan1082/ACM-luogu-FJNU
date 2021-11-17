@@ -39,7 +39,8 @@ public class SavePastData implements Runnable {
             try {
                 TimeUnit.MILLISECONDS.sleep(Math.max(0, dif));
                 System.out.println("开始更新昨天数据！！");
-                Users pastData = GetDataUtil.get();
+                Users pastData = JsonUtils.readJSON("./resources/newData.json", Users.class);
+//                Users pastData = GetDataUtil.get();
                 JsonUtils.writeJSON(pastData, "./resources/pastData.json");
                 System.out.println("昨天数据更新昨天！！");
                 TimeUnit.MINUTES.sleep(11); // 等待
