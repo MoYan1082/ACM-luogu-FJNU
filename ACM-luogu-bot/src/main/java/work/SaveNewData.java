@@ -33,9 +33,10 @@ public class SaveNewData implements Runnable {
                 System.out.println("数据刷新成功！！");
 
                 // 使用phantomjs工具获取web页面的png图片
-                ProcessBuilder processBuilder = new ProcessBuilder();
-                processBuilder.command("bash", "-c", "phantomjs ./resources/getPng.js");
-                Process process = processBuilder.start();
+                // FIXME 没有找到解决方案
+                /*ProcessBuilder processBuilder = new ProcessBuilder();
+                processBuilder.command("bash", "-c", "sudo phantomjs ./resources/getPng.js");
+                Process process = processBuilder.start();*/
 
                 TimeUnit.MINUTES.sleep(10);
             } catch (Exception e) {
