@@ -19,8 +19,8 @@ public class JavaMain {
 
     public static void main(String[] args) {
         ExecutorService exec = Executors.newCachedThreadPool();
-        exec.execute(new SavePastData());
         exec.execute(new SaveNewData());
+        exec.execute(new SavePastData());
         exec.execute(new Reminder());
 
         CURRENT_BOT = BotFactory.INSTANCE.newBot(QQcount.USER_NAME, QQcount.PASSWARD, new BotConfiguration() {{

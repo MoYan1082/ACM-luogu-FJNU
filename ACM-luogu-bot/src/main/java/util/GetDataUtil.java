@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,7 +67,7 @@ public class GetDataUtil {
      * @return
      * @throws IOException
      */
-    public static synchronized Users get() throws IOException {
+    public static synchronized Users get() throws IOException, InterruptedException {
         Users users = new Users();
         users.time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         // =======================================================================================
@@ -95,7 +96,10 @@ public class GetDataUtil {
         // 获取每个uid的passedProblemCount
         for (Data item : users.data) {
             String url_user = "https://www.luogu.com.cn/user/" + item.uid;
-            String jsonstring = HtmlAnalyzeUtils.getJson(url_user).toString();
+            JSONObject jsonObject = HtmlAnalyzeUtils.getJson(url_user);
+            String jsonstring = "";
+            if(jsonObject != null) jsonstring = jsonObject.toString();
+            else System.out.println("异常数据：" + url_user);
             // 用正则表达式筛选信息
             String regex = "passedProblemCount\":[0-9]*";
             Pattern p = Pattern.compile(regex);
@@ -104,6 +108,7 @@ public class GetDataUtil {
                 String ans = m.group(0);
                 item.passedProblemCount = Integer.parseInt(ans.substring(20));
             }
+            TimeUnit.MILLISECONDS.sleep(500);
         }
         users.data.sort((o1, o2) -> o2.passedProblemCount - o1.passedProblemCount);
         return users;
