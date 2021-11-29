@@ -39,8 +39,10 @@ public class HtmlAnalyzeUtils {
         BufferedReader in = new BufferedReader(new FileReader(filename));
         String s;
         StringBuilder sb = new StringBuilder();
-        while((s = in.readLine()) != null)
-            sb.append(s + "\n");
+        while((s = in.readLine()) != null) {
+            if(!sb.isEmpty())  sb.append("\n");
+            sb.append(s);
+        }
         in.close();
         return sb.toString();
     }
@@ -56,15 +58,13 @@ public class HtmlAnalyzeUtils {
         String res = "";
         URL realUrl = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
-        connection.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36");
-
-        // 一个没能解决的问题 BUG(悲)
-        // cookie设置时一直报错，不知道原因
-        /* try {
-            connection.setRequestProperty("cookie", readTxt("./resources/cookie.txt"));
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36");
+        try {
+            String cookie = readTxt("./resources/cookie.txt");
+            connection.setRequestProperty("cookie", cookie);
         } catch (Exception e) {
             System.out.println("设置cookie失败!\n" + e.getMessage());
-        } */
+        }
         connection.setConnectTimeout(3000); // 设置超时
         connection.setReadTimeout(3000);
         try {
@@ -82,6 +82,8 @@ public class HtmlAnalyzeUtils {
                 res += stringBuffer;// 添加
                 inputStreamReader.close();
                 bufferedReader.close();
+            } else {
+                System.out.println("连接失败：" + connection.getResponseCode());
             }
         }
         catch (IllegalArgumentException e){
